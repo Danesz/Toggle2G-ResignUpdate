@@ -371,6 +371,12 @@ public class Resign
             else
             {
                 System.out.println("WARNING: no default APK found for auto keying");
+                System.out.println("         not found system/app/phone.apk");
+                System.out.println("         not found system/app/settings.apk");
+                System.out.println("         not found system/app/SecPhone.apk");
+                System.out.println("         not found system/app/SecSettings.apk");
+                System.out.println("         If you know where one of these files are in the ROM's zip file");
+                System.out.println("         then put the correct path/file.apk in the -keyapk parameter.");
             }
 
             for (String apk : keyFromApks)
