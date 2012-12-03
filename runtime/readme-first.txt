@@ -1,4 +1,4 @@
-resignUpdate v3.0.0 : Toggle2G v0.3.0 
+resignUpdate v3.0.0
 
 0. I AM NOT RESPONSIBLE FOR ANY DAMAGES, LOSS OF TIME, OR BAD JUDGMENT
 
