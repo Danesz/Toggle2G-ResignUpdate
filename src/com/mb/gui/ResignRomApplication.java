@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
+import java.security.Permission;
 
 import com.mb.resign.Resign;
 
@@ -108,6 +109,7 @@ public class ResignRomApplication
                 Thread thread = new Thread() { public void run() {
                     try
                     {
+                        System.setSecurityManager(new NoExitSecurityManager());
                         String keyapk = textField_keyapk.getText();
                         if ( keyapk != null && keyapk.trim().length() > 0 )
                         {
@@ -122,12 +124,38 @@ public class ResignRomApplication
                     {
                         e1.printStackTrace();
                     }
+                    finally
+                    {
+                        System.setSecurityManager(null);
+                    }
                     frmResignToolBy.setEnabled(true);
                     btnResign.setText("Resign");
                     btnResign.setEnabled(true);
                     button.setEnabled(true);
                     textField_keyapk.setEditable(true);
-                }; };
+                }; 
+                
+                    class NoExitSecurityManager extends SecurityManager 
+                    {
+                        @Override
+                        public void checkPermission(Permission perm) 
+                        {
+                            // allow anything.
+                        }
+                        @Override
+                        public void checkPermission(Permission perm, Object context) 
+                        {
+                            // allow anything.
+                        }
+                        @Override
+                        public void checkExit(int status) 
+                        {
+                            super.checkExit(status);
+                            throw new RuntimeException();
+                        }
+                    }
+
+                };
                 
                 thread.setDaemon(true);
                 thread.start();
